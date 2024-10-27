@@ -24,15 +24,19 @@ function SignUpScreen() {
       );
       return;
     }
-
+  
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      console.log("Creating user with email:", email);
+      console.log("Using password:", password);
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      console.log("User created:", userCredential.user);
       Alert.alert("Success", "Account created successfully");
       setEmail("");
       setPassword("");
       setConfirmPassword("");
       navigation.navigate("Login");
     } catch (error) {
+      console.error("Error creating user:", error);
       Alert.alert("Error", `Error creating user: ${error.message}`);
     }
   };
